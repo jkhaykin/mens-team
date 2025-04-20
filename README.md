@@ -1,6 +1,6 @@
-# Waypoint GitHub Pages Site
+# Manifest GitHub Pages Site
 
-A simple HTML/CSS/JS website for the Waypoint men's team that can be hosted on GitHub Pages.
+A simple HTML/CSS/JS website for the Manifest men's team that can be hosted on GitHub Pages.
 
 ## Features
 
