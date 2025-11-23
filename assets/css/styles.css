@@ -174,7 +174,7 @@ img {
 .banner {
     height: 100vh;
     background-color: var(--dark-gray);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/banner-bg.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/banner-bg.jpeg');
     background-size: cover;
     background-position: center;
     display: flex;
