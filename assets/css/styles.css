@@ -359,6 +359,7 @@ img {
 @media screen and (max-width: 768px) {
     .banner {
         height: 40vh;
+        min-height: 350px;
         background-color: transparent;
     }
     
