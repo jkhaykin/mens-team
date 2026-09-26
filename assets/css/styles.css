@@ -232,6 +232,21 @@ img {
     font-size: 1.1rem;
 }
 
+/* Thank You Page */
+.thank-you {
+    min-height: 70vh;
+    padding-top: 160px;
+}
+
+.thank-you .success-message {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.thank-you .success-message p {
+    margin-bottom: 25px;
+}
+
 /* Values Section */
 .values h2 {
     text-align: center;
