@@ -46,40 +46,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Mobile navigation toggle
-    const createMobileMenu = () => {
-        const header = document.querySelector('.site-header');
-        const nav = document.querySelector('.main-nav');
-        
-        // Create hamburger menu button
-        const hamburger = document.createElement('div');
-        hamburger.className = 'hamburger';
-        hamburger.innerHTML = '<span></span><span></span><span></span>';
-        header.querySelector('.wrapper').appendChild(hamburger);
-        
-        // Toggle navigation on click
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            nav.classList.toggle('open');
-        });
-        
-        // Close menu when clicking a link
-        const navLinks = nav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                nav.classList.remove('open');
-            });
-        });
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.main-nav');
+
+    const setMenuOpen = (open) => {
+        hamburger.classList.toggle('active', open);
+        nav.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     };
-    
-    // Initialize mobile menu for smaller screens
-    const mobileMenuInit = () => {
-        if (window.innerWidth <= 768) {
-            createMobileMenu();
-        }
-    };
-    
-    mobileMenuInit();
+
+    hamburger.addEventListener('click', function() {
+        setMenuOpen(!nav.classList.contains('open'));
+    });
+
+    // Close menu when clicking a link
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            setMenuOpen(false);
+        });
+    });
     
     // Contact form handling
     if (contactForm) {
