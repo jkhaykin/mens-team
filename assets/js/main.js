@@ -1,5 +1,10 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Keep the footer copyright year current
+    document.querySelectorAll('.current-year').forEach(el => {
+        el.textContent = new Date().getFullYear();
+    });
+
     // Get elements
     const topButton = document.getElementById('top-button');
     const contactForm = document.getElementById('contact-form');
