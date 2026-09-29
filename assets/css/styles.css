@@ -176,8 +176,8 @@ img {
 /* Banner Styles */
 .banner {
     position: relative;
-    height: calc(100vh - 200px);
-    min-height: 480px;
+    min-height: max(480px, calc(100vh - 200px));
+    padding-top: 60px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
