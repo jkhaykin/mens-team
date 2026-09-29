@@ -176,9 +176,10 @@ img {
 /* Banner Styles */
 .banner {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - 200px);
+    min-height: 480px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
     color: var(--white);
@@ -219,29 +220,18 @@ img {
     border-radius: 20px;
 }
 
-.banner-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
 
-.btn-outline {
-    background-color: transparent;
-    border: 2px solid var(--white);
-    padding: 10px 22px;
-}
-
-.btn-outline:hover {
-    background-color: var(--white);
-    color: var(--dark-gray);
-}
 
 .banner-content {
     position: relative;
     z-index: 2;
     max-width: 800px;
-    padding: 0 20px;
+    padding: 0 20px 60px;
+}
+
+.banner-cta {
+    text-align: center;
+    padding: 35px 20px 0;
 }
 
 .banner h1 {
@@ -744,9 +734,13 @@ img {
 
     .banner {
         height: auto;
-        min-height: 350px;
-        padding: 40px 0;
+        min-height: 380px;
+        padding: 40px 0 0;
         background-color: transparent;
+    }
+
+    .banner-content {
+        padding-bottom: 35px;
     }
 
     .banner .banner-badge {
