@@ -12,20 +12,65 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manifest - Helping Men Along Their Journey</title>
-    <meta name="description" content="An alternative social contract for men prioritizing transparency over self-promotion.">
-    
+    <title>Manifest Men's Group | Men's Groups in Marin County &amp; the Bay Area</title>
+    <meta name="description" content="Manifest is a nonprofit men's group in Marin County, CA. Small weekly men's groups for personal growth, honest connection, and lifelong friendship. Contact us for an intake interview.">
+    <link rel="canonical" href="https://www.manifestmensgroup.org/">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Manifest Men's Group">
+    <meta property="og:title" content="Manifest Men's Group | Men's Groups in Marin County">
+    <meta property="og:description" content="Small weekly men's groups for personal growth, honest connection, and lifelong friendship. Contact us for an intake interview.">
+    <meta property="og:url" content="https://www.manifestmensgroup.org/">
+    <meta property="og:image" content="https://www.manifestmensgroup.org/assets/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Manifest Mens Group",
+        "alternateName": "Manifest",
+        "url": "https://www.manifestmensgroup.org/",
+        "logo": "https://www.manifestmensgroup.org/assets/img/logo.png",
+        "image": "https://www.manifestmensgroup.org/assets/img/og-image.jpg",
+        "description": "Nonprofit men's group in Marin County, California offering ongoing weekly men's groups and community programs focused on Men's Work, personal growth, authentic connection, and mutual support.",
+        "nonprofitStatus": "Nonprofit501c3",
+        "taxID": "42-4149494",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "San Rafael",
+            "addressRegion": "CA",
+            "addressCountry": "US"
+        },
+        "areaServed": ["Marin County, CA", "San Francisco Bay Area"],
+        "sameAs": ["https://www.meetup.com/mensgroup/"]
+    }
+    </script>
+
     <!-- Base URL -->
     <base href="./">
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <!-- Fonts (non-blocking) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    </noscript>
     
+    <!-- Preload hero image -->
+    <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/banner-800.webp 800w, assets/img/banner-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -35,26 +80,55 @@
         <div class="wrapper">
             <div class="logo">
                 <a href="index.html">
-                    <img src="assets/img/logo.png" alt="Manifest Logo">
+                    <img src="assets/img/logo.png" alt="Manifest Men's Group logo" width="200" height="40">
                 </a>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-nav">
                 <ul>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#programs">What We Do</a></li>
                     <li><a href="#values">Values</a></li>
+                    <li><a href="#join">Get Involved</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
+    <main>
     <!-- Banner Section -->
     <section class="banner">
-        <div class="banner-image"></div>
+        <div class="banner-image">
+            <picture>
+                <source type="image/webp" srcset="assets/img/banner-800.webp 800w, assets/img/banner-1600.webp 1600w" sizes="100vw">
+                <img class="banner-img" src="assets/img/banner-1600.jpg" srcset="assets/img/banner-800.jpg 800w, assets/img/banner-1600.jpg 1600w" sizes="100vw" alt="" fetchpriority="high">
+            </picture>
+        </div>
         <div class="banner-content">
-            <h1>Manifest</h1>
+            <h1>Manifest Men's Group</h1>
             <p>A community of men who support each other to be our best.</p>
-            <a href="#about" class="btn">Learn More</a>
+            <p class="banner-badge">A 501(c)(3) nonprofit serving men in the Bay Area</p>
+        </div>
+    </section>
+
+    <!-- Banner Call to Action -->
+    <div class="banner-cta">
+        <a href="#contact" class="btn">Request an Intake Interview</a>
+    </div>
+
+    <!-- Mission Section -->
+    <section id="mission" class="mission section">
+        <div class="wrapper">
+            <h2>Our Mission</h2>
+            <p class="mission-statement">To support men&rsquo;s personal growth through membership on a men&rsquo;s team, mentorship, and periodic workshops, cultivating men who positively impact their families and communities.</p>
+            <ul class="nonprofit-facts">
+                <li><i class="fas fa-certificate" aria-hidden="true"></i> IRS-recognized 501(c)(3) nonprofit</li>
+                <li><i class="fas fa-file-alt" aria-hidden="true"></i> EIN 42-4149494</li>
+                <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Marin County, California</li>
+            </ul>
         </div>
     </section>
 
@@ -67,6 +141,45 @@
                 <p>For 40 years, Men's Work has evolved in the Bay Area and across the country as a practice of radical honesty and mutual support. The work is about men stepping out from behind their shadows to be seen by a chosen circle of men. It takes intense trust to be visible to one's peers in this way, and it's an experience most men simply never have given how easy it is to remain anonymous in an isolated world. But once a man takes the bold step to be seen and feels the weight that lifts off his shoulders, he rarely goes back.</p>
                 <p>Our groups are about growth, but also so much more. The work includes friendship, male camaraderie, fun, laughs, and a sense of being part of something larger than oneself. The groups range from 6-10 men, are private and confidential, and meet weekly for indefinite periods of time. The time commitment is not trivial, but the rewards are virtually unlimited. In short, our groups are a place where you can expect to make some of your most important lifelong friendships.</p>
                 <p>Thousands of men have transformed their lives through this work. Is it time to see what it can do for yours?</p>
+                <picture>
+                    <source type="image/webp" srcset="assets/img/about-photo.webp">
+                    <img class="about-photo" src="assets/img/about-photo.jpg" alt="Six Manifest members smiling together in a group selfie" width="1200" height="900" loading="lazy">
+                </picture>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs section">
+        <div class="wrapper">
+            <h2>What We Do</h2>
+            <p class="section-intro">Manifest offers a set of programs designed to help men grow, connect, and show up better for the people in their lives.</p>
+            <div class="card-container programs-grid">
+                <div class="card">
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    <h3>Weekly Men&rsquo;s Teams</h3>
+                    <p>Our core program. Teams of 6&ndash;10 men meet weekly in a private, confidential setting to share honestly, support each other, and hold each other accountable. Teams meet for indefinite periods, so trust has time to grow deep.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    <h3>Monthly Community Meeting</h3>
+                    <p>Once a month, men from across our teams come together as a larger community to connect, share, and strengthen the bonds between teams.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-compass" aria-hidden="true"></i>
+                    <h3>Mentorship</h3>
+                    <p>Members support each other one-on-one through mentorship, helping men find their footing on a team and through the challenges and transitions of life.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    <h3>Workshops &amp; Processes</h3>
+                    <p>Periodic workshops and structured group processes on accountability, gratitude, relationships, and purpose.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-comments" aria-hidden="true"></i>
+                    <h3>Activities &amp; Online Discussion</h3>
+                    <p>The organization sponsors a range of activities and online discussion groups that keep members connected between meetings.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -79,7 +192,7 @@
                 <div class="card">
                     <i class="fas fa-users"></i>
                     <h3>Authentic Friendships</h3>
-                    <p>We support men to have authentic friendships. Sure, we like to have fun together, but we're looking for something more: authentic, lifelong friendships with great men we trust, who become like brothers.</p>
+                    <p>We support men to have authentic friendships. Sure, we like to have fun together, but we're looking for something more: authentic, lifelong friendships with great men we trust, who come to feel like brothers.</p>
                 </div>
                 <div class="card">
                     <i class="fas fa-arrows-alt"></i>
@@ -95,29 +208,63 @@
         </div>
     </section>
 
+    <!-- Get Involved Section -->
+    <section id="join" class="join section">
+        <div class="wrapper">
+            <h2>How to Get Involved</h2>
+            <ol class="steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <h3>Reach Out</h3>
+                    <p>Send us a note using the form below. Tell us a little about yourself and what you&rsquo;re looking for.</p>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <h3>Intake Interview</h3>
+                    <p>We&rsquo;ll set up a conversation to get to know you, answer your questions, and talk about what you&rsquo;re looking for.</p>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <h3>Try a Team</h3>
+                    <p>We give you an opportunity to visit a local group so you can experience the dynamic in person and see if it&rsquo;s a fit for you.</p>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <h3>Become a Member</h3>
+                    <p>After an initial visitation period you can become a permanent member of the group. Group membership tends to be very stable, with groups staying together for many years.</p>
+                </li>
+            </ol>
+            <div class="center"><a href="#contact" class="btn">Get Started</a></div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact section">
         <div class="wrapper">
             <h2>Is Manifest for You?</h2>
-            <p>Come visit a monthly meeting or contact us. It's a safe, trusted environment where men have authentic relationships with other men who support each other's journey through life.</p>
+            <p>Contact us to request an intake interview. Manifest is a safe, trusted environment where men have authentic relationships with other men who support each other's journey through life.</p>
             
-            <script type="text/javascript" src="https://form.jotform.com/jsform/250927094669066"></script>
+            <iframe id="JotFormIFrame-250927094669066" class="contact-form-frame" title="Contact Manifest Men's Group" src="https://form.jotform.com/250927094669066" loading="lazy" scrolling="no"></iframe>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer Section -->
     <footer class="site-footer">
         <div class="wrapper">
             <div class="social-links">
-                <a href="https://www.meetup.com/mensgroup/" target="_blank"><i class="fab fa-meetup"></i></a>
+                <a href="https://www.meetup.com/mensgroup/" target="_blank" rel="noopener" aria-label="Manifest on Meetup"><i class="fab fa-meetup"></i></a>
             </div>
-            <p>EIN: 42-4149494</p>
-
-            <p><a href="https://manifestmensgroup.org">manifestmensgroup.org</a> is the official website of Manifest Mens Group.</p>
-
-            <p>210 BAYVIEW DRIVE SAN RAFAEL, CA 94901</p>
-            <br>
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Manifest. All rights reserved.</p>
+            <p class="footer-nonprofit"><strong>Manifest Men&rsquo;s Group is a registered 501(c)(3) nonprofit organization.</strong><br>EIN: 42-4149494 &middot; San Rafael, CA</p>
+            <p class="footer-links">
+                <a href="#about">About</a> &middot;
+                <a href="#programs">What We Do</a> &middot;
+                <a href="#join">Get Involved</a> &middot;
+                <a href="#contact">Contact</a>
+            </p>
+            <p><a href="https://www.manifestmensgroup.org/">manifestmensgroup.org</a> is the official website of Manifest Men&rsquo;s Group.</p>
+            <p>&copy; <span class="current-year">2026</span> Manifest Men&rsquo;s Group. All rights reserved.</p>
         </div>
     </footer>
 
@@ -127,6 +274,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js" defer></script>
 </body>
 </html> 
