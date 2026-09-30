@@ -566,6 +566,10 @@ img {
     margin: 10px auto 25px;
 }
 
+.process p a {
+    text-decoration: underline;
+}
+
 .process .back-link {
     display: inline-block;
     margin-top: 40px;
