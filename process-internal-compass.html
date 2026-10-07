@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js), deferred -->
     <script>
-    // The contact form is embedded in an iframe; if JotForm redirects inside
-    // that frame, reload this page as the full window instead.
-    if (window.top !== window.self) {
-        window.top.location.href = window.location.href;
-    }
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5"></script>
-    <script>
+    // Load gtag.js after the page has finished loading so it doesn't compete
+    // with the banner and styles on slow mobile connections.
+    window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5';
+        document.head.appendChild(s);
+    });
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -19,9 +19,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | Manifest Men's Group</title>
-    <meta name="description" content="Thanks for contacting Manifest Men's Group.">
-    <link rel="canonical" href="https://www.manifestmensgroup.org/thank-you.html">
+    <title>See Your Internal Compass Process | Manifest Men's Group</title>
+    <meta name="description" content="A men's group process in two parts: draw your lifeline of highs and lows and see how they shaped your values, then write a personal credo of life's most vital lessons.">
+    <link rel="canonical" href="https://www.manifestmensgroup.org/process-internal-compass.html">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
@@ -29,13 +29,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <meta name="robots" content="noindex">
-    <script>
-    // Contact form submission, used as the Google Ads conversion
-    if (window.top === window.self) {
-        gtag('event', 'generate_lead', { form: 'contact' });
-    }
-    </script>
 </head>
 <body>
     <!-- Header Section -->
@@ -51,7 +44,7 @@
                     <li><a href="index.html#about">About</a></li>
                     <li><a href="index.html#programs">What We Do</a></li>
                     <li><a href="index.html#locations">Locations</a></li>
-                    <li><a href="processes.html">Processes</a></li>
+                    <li><a href="processes.html" class="current">Processes</a></li>
                     <li><a href="tools.html">Tools</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
@@ -66,18 +59,69 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="wrapper">
-            <h1>Thank You</h1>
-            <p>We&rsquo;ve received your message and someone from Manifest will be in touch soon.</p>
+            <span class="eyebrow">Process</span>
+            <h1>See Your Internal Compass</h1>
+            <p>Map the highs and lows of your life, see how they shaped your values, and write down what you&rsquo;ve learned.</p>
         </div>
     </section>
 
     <!-- Content -->
     <section class="section">
         <div class="wrapper">
-            <div class="process center">
-                <p>While you wait, learn more about <a href="index.html#programs">what we do</a> and <a href="index.html#join">how to get involved</a>.</p>
-                <a href="index.html" class="btn">Back to Home</a>
-            </div>
+            <article class="process">
+                <h2>Part 1: Lifeline</h2>
+
+                <h3>Draw Your Lifeline</h3>
+                <ul>
+                    <li>Take a totally blank sheet of paper and put it in front of you with the long edges at the top and bottom.</li>
+                    <li>Draw a line from the left side of the page to the right that represents your life from birth up until this moment.</li>
+                    <li>For periods in your life that were &ldquo;low energy,&rdquo; draw the line lower on the page.</li>
+                    <li>For periods that were &ldquo;high energy,&rdquo; make the line go higher on the page.</li>
+                </ul>
+                <p>You will end up with one single line going from left to right, with ups and downs that represent the highs and lows in your life.</p>
+                <p>When you&rsquo;re done, go through and label each of the highs and lows with just a few words, like &ldquo;parents divorced&rdquo; or &ldquo;got my dream job.&rdquo;</p>
+
+                <h3>Team Discussion</h3>
+                <p>Show your lifeline to your team and talk through the highs and lows. Let them ask you questions.</p>
+                <div class="callout">
+                    <p>For each high and low point, ask yourself: how did that experience shape my core values?</p>
+                </div>
+
+                <h2>Part 2: Personal Credo</h2>
+
+                <h3>Write Your Credo</h3>
+                <p>Imagine that you are nearing the end of your life. Write down the most important things you have learned in your lifetime.</p>
+                <p>The purpose is to preserve for future generations the lessons you believe are most vital. This is not a long essay, but a series of shorter statements, or pearls of wisdom. As you write, you can think of all of humankind as your audience, or just a dear friend or family member you&rsquo;re writing for. Either way, try to capture the essence of your most important advice or insights into life.</p>
+
+                <h4>Topics you might include</h4>
+                <p>Here are some topics, each with an example of the kind of short statement you might write:</p>
+                <ul>
+                    <li><strong>Relationships:</strong> Start early, experiment, you have nothing to lose.</li>
+                    <li><strong>Physical health:</strong> Duh&hellip;</li>
+                    <li><strong>Success:</strong> Always changes. Think ahead.</li>
+                    <li><strong>Work:</strong> Is a dirty word. Think about passion.</li>
+                    <li><strong>Money:</strong> Is freedom to be happy, not happiness itself.</li>
+                    <li><strong>Spirituality:</strong> Is everything. It&rsquo;s your reason for the rest.</li>
+                    <li><strong>Adventure:</strong> Is inward.</li>
+                    <li><strong>Time:</strong> Is an illusion.</li>
+                    <li><strong>Failure:</strong> Do failure awesomely.</li>
+                    <li><strong>Facing challenges:</strong> Feels better than you think.</li>
+                </ul>
+
+                <h3>Team Discussion</h3>
+                <p>When you&rsquo;re done, share with your team what it was like to do this activity, and read them what you wrote. See what discussion emerges.</p>
+
+                <a href="processes.html" class="back-link">&larr; All Processes</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-band">
+        <div class="wrapper">
+            <h2>Interested in Joining?</h2>
+            <p>Every new member starts with a short intake interview.</p>
+            <a href="index.html#contact" class="btn">Request an Intake Interview</a>
         </div>
     </section>
 

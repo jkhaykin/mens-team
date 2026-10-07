@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js), deferred -->
     <script>
-    // The contact form is embedded in an iframe; if JotForm redirects inside
-    // that frame, reload this page as the full window instead.
-    if (window.top !== window.self) {
-        window.top.location.href = window.location.href;
-    }
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5"></script>
-    <script>
+    // Load gtag.js after the page has finished loading so it doesn't compete
+    // with the banner and styles on slow mobile connections.
+    window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5';
+        document.head.appendChild(s);
+    });
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -19,9 +19,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | Manifest Men's Group</title>
-    <meta name="description" content="Thanks for contacting Manifest Men's Group.">
-    <link rel="canonical" href="https://www.manifestmensgroup.org/thank-you.html">
+    <title>Processes | Manifest Men's Group</title>
+    <meta name="description" content="Group processes used in Manifest men's groups: structured exercises for insight, accountability, and connection.">
+    <link rel="canonical" href="https://www.manifestmensgroup.org/processes.html">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
@@ -29,13 +29,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <meta name="robots" content="noindex">
-    <script>
-    // Contact form submission, used as the Google Ads conversion
-    if (window.top === window.self) {
-        gtag('event', 'generate_lead', { form: 'contact' });
-    }
-    </script>
 </head>
 <body>
     <!-- Header Section -->
@@ -51,7 +44,7 @@
                     <li><a href="index.html#about">About</a></li>
                     <li><a href="index.html#programs">What We Do</a></li>
                     <li><a href="index.html#locations">Locations</a></li>
-                    <li><a href="processes.html">Processes</a></li>
+                    <li><a href="processes.html" class="current">Processes</a></li>
                     <li><a href="tools.html">Tools</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
@@ -66,18 +59,45 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="wrapper">
-            <h1>Thank You</h1>
-            <p>We&rsquo;ve received your message and someone from Manifest will be in touch soon.</p>
+            <h1>Processes</h1>
+            <p>Structured exercises our groups use to go deeper, from building insight to putting it into action.</p>
         </div>
     </section>
 
     <!-- Content -->
     <section class="section">
         <div class="wrapper">
-            <div class="process center">
-                <p>While you wait, learn more about <a href="index.html#programs">what we do</a> and <a href="index.html#join">how to get involved</a>.</p>
-                <a href="index.html" class="btn">Back to Home</a>
+            <div class="process-list">
+                                        <a href="process-what-would-that-look-like.html" class="process-card">
+                    <h2>What Would That Look Like?</h2>
+                    <p>An accountability process that sets insight aside and asks you to describe, concretely, what change would look like if you were 100% ready, then has the team grade it.</p>
+                    <span class="read-more">Read the process &rarr;</span>
+                </a>
+                <a href="process-internal-compass.html" class="process-card">
+                    <h2>See Your Internal Compass</h2>
+                    <p>Draw the highs and lows of your life as a single line and walk your team through it, then write a personal credo of the most important things you&rsquo;ve learned.</p>
+                    <span class="read-more">Read the process &rarr;</span>
+                </a>
+                <a href="process-gratitude.html" class="process-card">
+                    <h2>Gratitude</h2>
+                    <p>A guided exercise and group share for rewiring negative thinking through gratitude, with a daily journaling practice to take home.</p>
+                    <span class="read-more">Read the process &rarr;</span>
+                </a>
+                <a href="process-what-is-love.html" class="process-card">
+                    <h2>What Is Love?</h2>
+                    <p>Each man shares how he defines love, romantic or broader, the team reflects its experience of hearing him, then the group explores why the definitions differ.</p>
+                    <span class="read-more">Read the process &rarr;</span>
+                </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-band">
+        <div class="wrapper">
+            <h2>Interested in Joining?</h2>
+            <p>Every new member starts with a short intake interview.</p>
+            <a href="index.html#contact" class="btn">Request an Intake Interview</a>
         </div>
     </section>
 
