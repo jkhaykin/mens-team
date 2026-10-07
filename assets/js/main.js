@@ -61,6 +61,38 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     };
 
+    // Collapse to the hamburger menu whenever the full menu doesn't fit on one
+    // line. Measuring (instead of a fixed breakpoint) handles different fonts,
+    // zoom levels and text-size settings.
+    const header = document.querySelector('.site-header');
+    const headerRow = header.querySelector('.wrapper');
+    const logo = header.querySelector('.logo');
+    const navList = nav.querySelector('ul');
+
+    const fitNav = () => {
+        const wasOpen = nav.classList.contains('open');
+        header.classList.remove('nav-collapsed');
+        if (getComputedStyle(hamburger).display !== 'none') return; // fallback query already collapsed it
+        const rowStyle = getComputedStyle(headerRow);
+        const available = headerRow.clientWidth - parseFloat(rowStyle.paddingLeft) - parseFloat(rowStyle.paddingRight);
+        const needed = logo.offsetWidth + navList.scrollWidth + 32;
+        if (needed > available) {
+            header.classList.add('nav-collapsed');
+        } else if (wasOpen) {
+            setMenuOpen(false);
+        }
+    };
+
+    let fitQueued = false;
+    const queueFit = () => {
+        if (fitQueued) return;
+        fitQueued = true;
+        requestAnimationFrame(() => { fitQueued = false; fitNav(); });
+    };
+    fitNav();
+    window.addEventListener('resize', queueFit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNav);
+
     hamburger.addEventListener('click', function() {
         setMenuOpen(!nav.classList.contains('open'));
     });
