@@ -749,6 +749,47 @@ img {
     color: var(--white);
 }
 
+/* Locations */
+.locations h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.location-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.location {
+    background-color: var(--light-gray);
+    padding: 25px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.location .location-pin {
+    font-size: 1.8rem;
+    color: var(--waypoint-red);
+    margin-bottom: 10px;
+}
+
+.location h3 {
+    margin-bottom: 5px;
+}
+
+.location p {
+    color: var(--medium-gray);
+}
+
+.locations-note {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .mission-statement {
