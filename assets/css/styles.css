@@ -132,6 +132,40 @@ img {
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Collapsed menu: applied by main.js whenever the full menu doesn't fit on
+   one line, and by the media query below as a no-JavaScript fallback. */
+.site-header.nav-collapsed .hamburger {
+    display: block;
+}
+
+.site-header.nav-collapsed .main-nav ul {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--white);
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.site-header.nav-collapsed .main-nav.open ul {
+    max-height: 450px;
+}
+
+.site-header.nav-collapsed .main-nav li {
+    margin: 0;
+    text-align: center;
+}
+
+.site-header.nav-collapsed .main-nav a {
+    display: block;
+    padding: 15px;
 }
 
 .main-nav a:hover {
@@ -841,8 +875,8 @@ img {
     }
 }
 
-/* Switch to the hamburger menu before the desktop menu would wrap (it wraps below ~885px) */
-@media screen and (max-width: 900px) {
+/* No-JavaScript fallback for the collapsed menu (main.js measures the real fit) */
+@media screen and (max-width: 1100px) {
     .hamburger {
         display: block;
     }
@@ -861,7 +895,7 @@ img {
     }
     
     .main-nav.open ul {
-        max-height: 400px;
+        max-height: 450px;
     }
     
     .main-nav li {
