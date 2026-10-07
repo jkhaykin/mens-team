@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js), deferred -->
     <script>
-    // The contact form is embedded in an iframe; if JotForm redirects inside
-    // that frame, reload this page as the full window instead.
-    if (window.top !== window.self) {
-        window.top.location.href = window.location.href;
-    }
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5"></script>
-    <script>
+    // Load gtag.js after the page has finished loading so it doesn't compete
+    // with the banner and styles on slow mobile connections.
+    window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T85GZG9EH5';
+        document.head.appendChild(s);
+    });
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -19,9 +19,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | Manifest Men's Group</title>
-    <meta name="description" content="Thanks for contacting Manifest Men's Group.">
-    <link rel="canonical" href="https://www.manifestmensgroup.org/thank-you.html">
+    <title>Tools | Manifest Men's Group</title>
+    <meta name="description" content="Tools our men's groups use, including an emotions wheel for naming feelings with more precision.">
+    <link rel="canonical" href="https://www.manifestmensgroup.org/tools.html">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
@@ -29,13 +29,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <meta name="robots" content="noindex">
-    <script>
-    // Contact form submission, used as the Google Ads conversion
-    if (window.top === window.self) {
-        gtag('event', 'generate_lead', { form: 'contact' });
-    }
-    </script>
 </head>
 <body>
     <!-- Header Section -->
@@ -52,7 +45,7 @@
                     <li><a href="index.html#programs">What We Do</a></li>
                     <li><a href="index.html#locations">Locations</a></li>
                     <li><a href="processes.html">Processes</a></li>
-                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="tools.html" class="current">Tools</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -66,18 +59,36 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="wrapper">
-            <h1>Thank You</h1>
-            <p>We&rsquo;ve received your message and someone from Manifest will be in touch soon.</p>
+            <h1>Tools</h1>
+            <p>Resources we use in group to help men notice, name, and share what&rsquo;s going on inside.</p>
         </div>
     </section>
 
     <!-- Content -->
     <section class="section">
         <div class="wrapper">
-            <div class="process center">
-                <p>While you wait, learn more about <a href="index.html#programs">what we do</a> and <a href="index.html#join">how to get involved</a>.</p>
-                <a href="index.html" class="btn">Back to Home</a>
+            <div class="process-list">
+                <div class="process-card tool-card">
+                    <h2>Emotions Wheel</h2>
+                    <p>Most of us default to a handful of words: fine, good, stressed, mad. The wheel starts with core emotions at the center (happy, sad, angry, fearful, surprised, disgusted, bad) and moves outward to more specific feelings. When you check in or share in group, start at the center and work outward until you land on the word that fits.</p>
+                    <a href="assets/docs/emotions-wheel.pdf" target="_blank" rel="noopener">
+                        <picture>
+                            <source type="image/webp" srcset="assets/img/emotions-wheel.webp">
+                            <img width="900" height="900" loading="lazy" src="assets/img/emotions-wheel.jpg" alt="Emotions wheel: core emotions in the center (happy, sad, angry, fearful, surprised, disgusted, bad) branching outward into more specific feelings" class="tool-image">
+                        </picture>
+                    </a>
+                    <a href="assets/docs/emotions-wheel.pdf" class="btn" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 384 512" style="width:0.75em" aria-hidden="true" focusable="false"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg> Download PDF</a>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-band">
+        <div class="wrapper">
+            <h2>Interested in Joining?</h2>
+            <p>Every new member starts with a short intake interview.</p>
+            <a href="index.html#contact" class="btn">Request an Intake Interview</a>
         </div>
     </section>
 
