@@ -1,0 +1,23 @@
+# Free Supabase projects pause after ~7 days without activity, which would
+# break member sign-in. This pings the database twice a week to keep it awake.
+name: Keep members database awake
+
+on:
+  schedule:
+    - cron: "17 15 * * 1,4"   # Mondays and Thursdays, 15:17 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          # Publishable key: safe to publish (row-level security protects the data).
+          curl --fail --silent --show-error -X POST \
+            "https://pkzttsktekcjafhbepki.supabase.co/rest/v1/rpc/ping" \
+            -H "apikey: sb_publishable_mVHl3BNmefZmmzEUgcFRJw_osukXgHX" \
+            -H "Content-Type: application/json" \
+            -d '{}'
