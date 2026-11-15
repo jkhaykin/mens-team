@@ -15,18 +15,25 @@
             (isError ? 'alert' : 'status') + '">' + msg + '</p>';
     }
 
+    // Map Supabase Auth errors (by error code first, then message) to plain language.
     function friendlyError(err) {
         var msg = (err && (err.message || err.error_description)) || '';
+        var code = (err && err.code) || '';
         var status = err && err.status;
-        if (/expired|invalid|token/i.test(msg)) {
-            return 'That code didn&rsquo;t work. Check it and try again, or request a new code.';
-        }
-        if (status === 429 || /rate limit|too many|security purposes/i.test(msg)) {
-            return 'Please wait a minute before requesting another code.';
-        }
-        if (/not on the Manifest member list|signups? not allowed/i.test(msg)) {
+        if (/not on the Manifest member list/i.test(msg) || code === 'signup_disabled' ||
+            /signups? not allowed/i.test(msg)) {
             return 'That number isn&rsquo;t on the Manifest member list. If you&rsquo;re a member, ' +
                 'please <a href="/#contact">contact us</a> to update your number.';
+        }
+        if (status === 429 || /rate_limit/.test(code) || /rate limit|too many|security purposes/i.test(msg)) {
+            return 'Please wait a minute before requesting another code.';
+        }
+        if (code === 'sms_send_failed' || /sending .*otp|sms/i.test(msg)) {
+            return 'We couldn&rsquo;t send a text right now. Please try again later, or ' +
+                '<a href="/#contact">contact us</a> if it keeps happening.';
+        }
+        if (code === 'otp_expired' || /expired|invalid.*(token|otp|code)|token/i.test(msg)) {
+            return 'That code didn&rsquo;t work. Check it and try again, or request a new code.';
         }
         return 'Something went wrong. Please try again in a moment.';
     }
