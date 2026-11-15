@@ -25,13 +25,52 @@
     fill: currentColor;
 }
 
-/* Base Styles */
+/* Theme colors: the one place to adjust the site's palette.
+   Dark theme; every text pairing below meets WCAG AA (4.5:1 or better).
+   print.css swaps these for dark-on-white when printing. */
 :root {
-    --waypoint-red: #c2445a;
-    --dark-gray: #333;
-    --medium-gray: #666;
-    --light-gray: #f5f5f5;
-    --white: #fff;
+    color-scheme: dark;
+
+    /* Brand */
+    --brand-red: #b83a50;            /* buttons; white text 5.6:1 */
+    --brand-red-deep: #9e2f43;       /* "Interested in Joining?" band */
+    --brand-red-light: #f0889a;      /* links/accents on dark, 5.5:1+ */
+
+    /* Backgrounds, darkest to lightest */
+    --color-bg-deep: #141519;        /* header, footer */
+    --color-bg: #1c1d21;             /* page background (deep charcoal) */
+    --color-surface: #24262b;        /* alternate sections, callouts */
+    --color-surface-raised: #2d3036; /* cards, chips */
+
+    /* Text */
+    --color-text: #ece8e1;           /* off-white body text, 10.8:1+ */
+    --color-text-muted: #b3aea6;     /* secondary text, 6.0:1+ */
+    --color-text-on-image: #ffffff;
+
+    /* Links, accents, controls */
+    --color-link: var(--brand-red-light);
+    --color-link-hover: #ffffff;
+    --color-accent: var(--brand-red-light);
+    --color-button-bg: var(--brand-red);
+    --color-button-text: #ffffff;
+    --color-button-hover-bg: #ece8e1;
+    --color-button-hover-text: #1c1d21;
+    --color-cta-bg: var(--brand-red-deep);
+    --color-cta-text: #ece8e1;
+    --color-cta-button-bg: #ece8e1;
+    --color-cta-button-text: #8e2a3c;
+    --color-input-bg: #24262b;
+    --color-input-border: #7a7d85;   /* 4.1:1 against the page */
+
+    /* Lines and effects */
+    --color-border: #43464d;
+    --color-shadow: rgba(0, 0, 0, 0.45);
+    --color-highlight: #4a2a32;      /* glossary "jumped to" flash */
+
+    /* Regions */
+    --color-header-bg: var(--color-bg-deep);
+    --color-band-bg: var(--color-surface); /* page title bands */
+    --color-footer-bg: var(--color-bg-deep);
 }
 
 * {
@@ -42,9 +81,9 @@
 
 body {
     font-family: "Lato", sans-serif;
-    color: var(--dark-gray);
+    color: var(--color-text);
     line-height: 1.6;
-    background-color: var(--white);
+    background-color: var(--color-bg);
 }
 
 .wrapper {
@@ -56,12 +95,12 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--waypoint-red);
+    color: var(--color-link);
     transition: all 0.3s ease;
 }
 
 a:hover {
-    color: var(--dark-gray);
+    color: var(--color-link-hover);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -84,8 +123,8 @@ section[id] {
 
 .btn {
     display: inline-block;
-    background-color: var(--waypoint-red);
-    color: var(--white);
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
     padding: 12px 24px;
     border-radius: 4px;
     font-weight: 700;
@@ -95,8 +134,8 @@ section[id] {
 }
 
 .btn:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
+    background-color: var(--color-button-hover-bg);
+    color: var(--color-button-hover-text);
     transform: translateY(-2px);
 }
 
@@ -106,9 +145,9 @@ section[id] {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--color-header-bg);
     padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--color-shadow);
     z-index: 100;
 }
 
@@ -132,7 +171,7 @@ section[id] {
 }
 
 .main-nav a {
-    color: var(--dark-gray);
+    color: var(--color-text);
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -151,12 +190,12 @@ section[id] {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: var(--white);
+    background-color: var(--color-header-bg);
     width: 100%;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px var(--color-shadow);
 }
 
 .site-header.nav-collapsed .main-nav.open ul {
@@ -174,7 +213,7 @@ section[id] {
 }
 
 .main-nav a:hover {
-    color: var(--waypoint-red);
+    color: var(--color-link);
 }
 
 /* Hamburger Menu */
@@ -194,7 +233,7 @@ section[id] {
     display: block;
     width: 100%;
     height: 3px;
-    background-color: var(--dark-gray);
+    background-color: var(--color-text);
     position: absolute;
     transition: all 0.3s ease;
 }
@@ -227,7 +266,7 @@ section[id] {
 
 /* Success Message */
 .success-message {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
     padding: 30px;
     border-radius: 5px;
     text-align: center;
@@ -248,7 +287,7 @@ section[id] {
     align-items: flex-end;
     justify-content: center;
     text-align: center;
-    color: var(--white);
+    color: var(--color-text-on-image);
     margin-top: 86px;
 }
 
@@ -258,7 +297,7 @@ section[id] {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--dark-gray);
+    background-color: var(--color-bg-deep);
     z-index: 1;
     overflow: hidden;
 }
@@ -313,7 +352,7 @@ section[id] {
 
 /* About Section */
 .about {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
 }
 
 .about h2 {
@@ -366,11 +405,11 @@ section[id] {
 }
 
 .card {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface-raised);
     padding: 30px;
     border-radius: 5px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px var(--color-shadow);
     transition: all 0.3s ease;
 }
 
@@ -380,7 +419,7 @@ section[id] {
 
 .card .icon {
     font-size: 3rem;
-    color: var(--waypoint-red);
+    color: var(--color-accent);
     margin-bottom: 20px;
 }
 
@@ -390,7 +429,7 @@ section[id] {
 
 /* Contact Section */
 .contact {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
     text-align: center;
 }
 
@@ -417,7 +456,7 @@ section[id] {
     width: 100%;
     padding: 15px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-input-border);
     font-family: "Lato", sans-serif;
 }
 
@@ -428,8 +467,8 @@ section[id] {
 
 /* Footer Styles */
 .site-footer {
-    background-color: var(--dark-gray);
-    color: var(--white);
+    background-color: var(--color-footer-bg);
+    color: var(--color-text);
     padding: 40px 0;
     text-align: center;
 }
@@ -440,13 +479,13 @@ section[id] {
 
 .social-links a {
     display: inline-block;
-    color: var(--white);
+    color: var(--color-text);
     font-size: 1.5rem;
     margin: 0 10px;
 }
 
 .social-links a:hover {
-    color: var(--waypoint-red);
+    color: var(--color-link);
 }
 
 /* Back to Top Button */
@@ -471,22 +510,22 @@ section[id] {
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: var(--waypoint-red);
-    color: var(--white);
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
     border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px var(--color-shadow);
 }
 
 /* Inner Pages (Processes) */
 .main-nav a.current {
-    color: var(--waypoint-red);
+    color: var(--color-link);
 }
 
 .page-header {
     margin-top: 86px;
     padding: 70px 0 50px;
-    background-color: var(--dark-gray);
-    color: var(--white);
+    background-color: var(--color-band-bg);
+    color: var(--color-text);
     text-align: center;
 }
 
@@ -503,7 +542,7 @@ section[id] {
 
 .page-header .eyebrow {
     display: block;
-    color: #f28b9d;
+    color: var(--color-accent);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -520,18 +559,18 @@ section[id] {
 
 .process-card {
     display: block;
-    background-color: var(--light-gray);
+    background-color: var(--color-surface-raised);
     padding: 30px;
     border-radius: 5px;
-    border-left: 4px solid var(--waypoint-red);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    color: var(--dark-gray);
+    border-left: 4px solid var(--color-accent);
+    box-shadow: 0 5px 15px var(--color-shadow);
+    color: var(--color-text);
     transition: all 0.3s ease;
 }
 
 .process-card:hover {
     transform: translateY(-5px);
-    color: var(--dark-gray);
+    color: var(--color-text);
 }
 
 .process-card h2 {
@@ -544,7 +583,7 @@ section[id] {
 }
 
 .process-card .read-more {
-    color: var(--waypoint-red);
+    color: var(--color-link);
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -561,7 +600,7 @@ section[id] {
     scroll-margin-top: 100px;
     margin-top: 50px;
     padding-bottom: 10px;
-    border-bottom: 2px solid var(--light-gray);
+    border-bottom: 2px solid var(--color-border);
 }
 
 .process h2:first-child {
@@ -570,7 +609,7 @@ section[id] {
 
 .process h3 {
     margin-top: 35px;
-    color: var(--waypoint-red);
+    color: var(--color-accent);
 }
 
 .process h4 {
@@ -594,8 +633,8 @@ section[id] {
 .process blockquote {
     margin: 0 0 20px;
     padding: 15px 20px;
-    background-color: var(--light-gray);
-    border-left: 4px solid var(--waypoint-red);
+    background-color: var(--color-surface);
+    border-left: 4px solid var(--color-accent);
     font-style: italic;
 }
 
@@ -604,7 +643,7 @@ section[id] {
 }
 
 .process .callout {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
     padding: 20px 25px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -684,7 +723,7 @@ section[id] {
 }
 
 .nonprofit-facts .icon {
-    color: var(--waypoint-red);
+    color: var(--color-accent);
     margin-right: 6px;
 }
 
@@ -699,7 +738,7 @@ section[id] {
 }
 
 .join {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
 }
 
 .steps {
@@ -711,11 +750,11 @@ section[id] {
 }
 
 .steps li {
-    background-color: var(--white);
+    background-color: var(--color-surface-raised);
     padding: 30px 25px;
     border-radius: 5px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 15px var(--color-shadow);
 }
 
 .step-num {
@@ -726,8 +765,8 @@ section[id] {
     height: 44px;
     margin-bottom: 15px;
     border-radius: 50%;
-    background-color: var(--waypoint-red);
-    color: var(--white);
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
     font-weight: 700;
     font-size: 1.2rem;
 }
@@ -754,17 +793,17 @@ section[id] {
 }
 
 .site-footer a {
-    color: var(--white);
+    color: var(--color-text);
     text-decoration: underline;
 }
 
 .site-footer a:hover {
-    color: var(--waypoint-red);
+    color: var(--color-link);
 }
 
 .cta-band {
-    background-color: var(--waypoint-red);
-    color: var(--white);
+    background-color: var(--color-cta-bg);
+    color: var(--color-cta-text);
     text-align: center;
     padding: 50px 0;
 }
@@ -779,13 +818,13 @@ section[id] {
 }
 
 .cta-band .btn {
-    background-color: var(--white);
-    color: var(--waypoint-red);
+    background-color: var(--color-cta-button-bg);
+    color: var(--color-cta-button-text);
 }
 
 .cta-band .btn:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 /* Locations */
@@ -803,7 +842,7 @@ section[id] {
 }
 
 .location {
-    background-color: var(--light-gray);
+    background-color: var(--color-surface-raised);
     padding: 25px 20px;
     border-radius: 5px;
     text-align: center;
@@ -811,7 +850,7 @@ section[id] {
 
 .location .location-pin {
     font-size: 1.8rem;
-    color: var(--waypoint-red);
+    color: var(--color-accent);
     margin-bottom: 10px;
 }
 
@@ -820,7 +859,7 @@ section[id] {
 }
 
 .location p {
-    color: var(--medium-gray);
+    color: var(--color-text-muted);
 }
 
 .locations-note {
@@ -891,12 +930,12 @@ section[id] {
         position: absolute;
         top: 100%;
         right: 0;
-        background-color: var(--white);
+        background-color: var(--color-header-bg);
         width: 100%;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 10px var(--color-shadow);
     }
     
     .main-nav.open ul {
@@ -940,12 +979,12 @@ section[id] {
     z-index: 50;
     margin: 0 -12px 25px;
     padding: 8px 12px 6px;
-    background-color: var(--white);
+    background-color: var(--color-bg);
     transition: box-shadow 0.2s ease;
 }
 
 .glossary-search.is-stuck {
-    box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 8px -6px var(--color-shadow);
 }
 
 .glossary-search input {
@@ -953,9 +992,9 @@ section[id] {
     padding: 10px 14px;
     font: inherit;
     font-size: 1.1rem; /* 16px+ keeps iOS from zooming in */
-    color: var(--dark-gray);
-    background-color: var(--white);
-    border: 2px solid #ccc;
+    color: var(--color-text);
+    background-color: var(--color-input-bg);
+    border: 2px solid var(--color-input-border);
     border-radius: 5px;
     -webkit-appearance: none;
     appearance: none;
@@ -963,13 +1002,13 @@ section[id] {
 
 .glossary-search input:focus {
     outline: none;
-    border-color: var(--waypoint-red);
+    border-color: var(--color-accent);
 }
 
 .glossary-count {
     margin: 8px 0 0;
     font-size: 0.95rem;
-    color: var(--medium-gray);
+    color: var(--color-text-muted);
 }
 
 .process .glossary-count {
@@ -994,31 +1033,31 @@ section[id] {
 .glossary-jump a {
     padding: 6px 14px;
     border-radius: 20px;
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;
 }
 
 .glossary-jump a:hover {
-    color: var(--waypoint-red);
+    color: var(--color-link);
 }
 
 .glossary-jump span {
     font-weight: 400;
-    color: var(--medium-gray);
+    color: var(--color-text-muted);
 }
 
 .glossary-status {
     padding: 20px 25px;
-    background-color: var(--light-gray);
+    background-color: var(--color-surface);
     border-radius: 5px;
     text-align: center;
 }
 
 .glossary-status.is-error {
-    border-left: 4px solid var(--waypoint-red);
+    border-left: 4px solid var(--color-accent);
     text-align: left;
 }
 
@@ -1034,7 +1073,7 @@ section[id] {
 .process .glossary-intro {
     margin: 12px 0 25px;
     font-style: italic;
-    color: var(--medium-gray);
+    color: var(--color-text-muted);
 }
 
 .glossary-list {
@@ -1051,7 +1090,7 @@ section[id] {
 .glossary-entry dt {
     font-weight: 700;
     font-size: 1.15rem;
-    color: var(--waypoint-red);
+    color: var(--color-accent);
     margin-bottom: 4px;
 }
 
@@ -1069,7 +1108,7 @@ section[id] {
 }
 
 @keyframes glossary-flash {
-    from { background-color: #fbe3e7; }
+    from { background-color: var(--color-highlight); }
     to   { background-color: transparent; }
 }
 

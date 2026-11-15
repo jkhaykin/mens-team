@@ -1,0 +1,122 @@
+/* Print: dark text on white, regardless of the on-screen dark theme.
+   Loaded after styles.css with media="print", so these tokens win. */
+:root {
+    color-scheme: light;
+
+    --color-bg-deep: #ffffff;
+    --color-bg: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-raised: #ffffff;
+
+    --color-text: #1a1a1a;
+    --color-text-muted: #444444;
+    --color-text-on-image: #1a1a1a;
+
+    --color-link: #1a1a1a;
+    --color-link-hover: #1a1a1a;
+    --color-accent: #8e2a3c;          /* brand red, dark enough for paper */
+    --color-input-bg: #ffffff;
+    --color-input-border: #999999;
+
+    --color-border: #cccccc;
+    --color-shadow: transparent;
+    --color-highlight: transparent;
+
+    --color-cta-bg: #ffffff;
+    --color-cta-text: #1a1a1a;
+}
+
+*,
+*::before,
+*::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+html,
+body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+/* Screen-only chrome */
+.site-header,
+.hamburger,
+.back-to-top,
+.cta-band .btn,
+.btn,
+.social-links,
+.glossary-label,
+.glossary-search,
+.glossary-jump,
+.contact-form-frame,
+.banner-image {
+    display: none !important;
+}
+
+/* The fixed header is hidden, so drop the space reserved for it */
+.page-header {
+    margin-top: 0;
+    padding: 0 0 12pt;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+.banner {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 0 12pt !important;
+}
+
+.section,
+.cta-band,
+.site-footer {
+    padding: 16pt 0;
+}
+
+.wrapper {
+    max-width: none;
+    padding: 0;
+}
+
+/* Cards and boxes: outline instead of fill */
+.card,
+.process-card,
+.location,
+.steps li,
+.process blockquote,
+.process .callout,
+.glossary-status {
+    border: 1px solid #cccccc;
+    box-shadow: none !important;
+}
+
+/* Show where external links go */
+main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #444444;
+    overflow-wrap: anywhere;
+}
+
+/* Keep terms, headings and their text together */
+h1, h2, h3, h4 {
+    break-after: avoid;
+}
+
+.glossary-entry,
+.card,
+.location,
+.process-card,
+blockquote,
+img {
+    break-inside: avoid;
+}
+
+.glossary-section[hidden],
+.glossary-entry[hidden] {
+    display: block !important; /* print every term even if a search is active */
+}
+
+img {
+    max-width: 100% !important;
+}
