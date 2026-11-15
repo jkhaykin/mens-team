@@ -6,7 +6,7 @@
     var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVqQWktC3WQbPRAFTAhzZ4uEodhJbg56GY1qQwnvuw4ZYhHG6z_1ZKbfBSRjCTQrX3BsFqOVsQMp56/pub?gid=1167775952&single=true&output=csv';
 
     var SECTIONS = [
-        { name: 'Core Terms', intro: 'What you’ll hear at your first team meeting.' },
+        { name: 'Core Terms', intro: 'What you’ll hear at team meetings and Manifest gatherings.' },
         { name: 'Going Deeper', intro: 'Useful once you’re in deeper.' },
         { name: 'Roots and History', intro: 'Where these practices came from.' }
     ];
