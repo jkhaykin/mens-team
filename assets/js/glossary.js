@@ -187,6 +187,7 @@
         if (location.hash) {
             var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
             if (target) {
+                setOffset();
                 target.scrollIntoView();
                 flash(target);
             }
@@ -235,6 +236,7 @@
         var target = document.getElementById(a.getAttribute('href').slice(1));
         if (!target) return;
         ev.preventDefault();
+        setOffset();
         if (target.hidden || (target.closest('[hidden]'))) {
             searchEl.value = '';
             filter();
@@ -244,9 +246,39 @@
         if (target.classList.contains('glossary-entry')) flash(target);
     }
 
-    searchEl.addEventListener('input', filter);
+    // While the bar is pinned, typing jumps back to the top of the results
+    // so matches aren't left out of view above the current position.
+    var barEl = document.getElementById('glossary-bar');
+    var labelEl = document.querySelector('.glossary-label');
+    function isStuck() {
+        return labelEl.getBoundingClientRect().bottom < barEl.getBoundingClientRect().top - 1;
+    }
+    // Keep jump targets clear of the fixed header plus the pinned bar.
+    function setOffset() {
+        var header = document.querySelector('.site-header');
+        var bar = document.getElementById('glossary-bar');
+        var h = (header ? header.offsetHeight : 86) + bar.offsetHeight + 12;
+        document.querySelector('.glossary').style.setProperty('--glossary-offset', h + 'px');
+    }
+    setOffset();
+    window.addEventListener('resize', setOffset);
+    window.addEventListener('load', setOffset);
+
+    window.addEventListener('scroll', function () {
+        barEl.classList.toggle('is-stuck', isStuck());
+    }, { passive: true });
+
+    searchEl.addEventListener('input', function () {
+        filter();
+        if (isStuck()) {
+            var header = document.querySelector('.site-header');
+            var top = labelEl.getBoundingClientRect().top + window.pageYOffset -
+                (header ? header.offsetHeight : 0) - 10;
+            window.scrollTo(0, top);
+        }
+    });
     searchEl.addEventListener('keydown', function (ev) {
-        if (ev.key === 'Escape') { searchEl.value = ''; filter(); }
+        if (ev.key === 'Escape') { searchEl.value = ''; searchEl.dispatchEvent(new Event('input')); }
     });
 
     if (typeof Papa === 'undefined') { showError(); return; }
