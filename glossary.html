@@ -20,6 +20,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#141519">
     <title>Glossary | Manifest Mens Group</title>
     <meta name="description" content="A glossary of the words and phrases used in Manifest Mens Group men's teams, from check-ins and commitments to the roots of the men's work movement.">
     <link rel="canonical" href="https://www.manifestmensgroup.org/glossary.html">
@@ -30,6 +32,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/print.css" media="print">
 </head>
 <body>
     <!-- Header Section -->
@@ -62,7 +65,7 @@
     <section class="page-header">
         <div class="wrapper">
             <h1>Glossary</h1>
-            <p>The words and phrases you&rsquo;ll hear in Manifest Mens Group, and what we mean by them.</p>
+            <p>The words and phrases you&rsquo;ll hear in Manifest Mens Group and what we mean by them.</p>
         </div>
     </section>
 
@@ -70,8 +73,8 @@
     <section class="section">
         <div class="wrapper">
             <div class="process glossary">
-                <div class="glossary-search">
-                    <label for="glossary-search">Search the glossary</label>
+                <label class="glossary-label" for="glossary-search">Search the glossary</label>
+                <div class="glossary-search" id="glossary-bar">
                     <input type="search" id="glossary-search" placeholder="Search terms and meanings&hellip;" autocomplete="off" disabled>
                     <p class="glossary-count" id="glossary-count" aria-live="polite"></p>
                 </div>
