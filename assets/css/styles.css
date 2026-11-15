@@ -199,7 +199,18 @@ section[id] {
 }
 
 .site-header.nav-collapsed .main-nav.open ul {
-    max-height: 450px;
+    max-height: calc(100vh - 86px);
+    max-height: calc(100dvh - 86px);
+    overflow-y: auto;
+}
+
+/* Links that only appear in the hamburger menu, so it matches the footer */
+.main-nav .nav-extra {
+    display: none;
+}
+
+.site-header.nav-collapsed .main-nav .nav-extra {
+    display: list-item;
 }
 
 .site-header.nav-collapsed .main-nav li {
@@ -209,7 +220,7 @@ section[id] {
 
 .site-header.nav-collapsed .main-nav a {
     display: block;
-    padding: 15px;
+    padding: 12px 15px;
 }
 
 .main-nav a:hover {
@@ -939,7 +950,12 @@ section[id] {
     }
     
     .main-nav.open ul {
-        max-height: 450px;
+        max-height: calc(100vh - 86px);
+        overflow-y: auto;
+    }
+
+    .main-nav .nav-extra {
+        display: list-item;
     }
     
     .main-nav li {
@@ -949,7 +965,7 @@ section[id] {
     
     .main-nav a {
         display: block;
-        padding: 15px;
+        padding: 12px 15px;
     }
 }
  
