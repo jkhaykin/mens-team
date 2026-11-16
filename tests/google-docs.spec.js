@@ -23,7 +23,7 @@ const DOC = `<html><head><style>.c4{font-weight:700}.c9{font-style:italic}.c2{co
 test('keeps headings, paragraphs, bold, italics and links; drops Google styling', () => {
     const html = convert(DOC);
     expect(html).not.toContain('Manifest Men');          // the Doc's title (h1) is left out
-    expect(html).toContain('<h2>Meeting Basics</h2>');    // no <strong> inside headings
+    expect(html).toContain('<h2 id="meeting-basics">Meeting Basics</h2>');    // no <strong> inside headings
     expect(html).not.toMatch(/<h2><\/h2>/);              // empty heading dropped
     expect(html).not.toMatch(/<p><\/p>/);                // empty paragraph dropped
     expect(html).toContain('<p><strong>Bold lead.</strong> Plain text with <em>italics</em> &amp; a <a href="https://example.com/page" target="_blank" rel="noopener">link</a>.</p>');
@@ -41,6 +41,20 @@ test('never lets scripts or unsafe links through', () => {
     expect(html).toContain('bad link and &lt;script&gt;text&lt;/script&gt;');
 });
 
+test('every heading gets a link id, unique even when names repeat', () => {
+    const doc = (body) => `<div id="contents">${body}</div><div id="footer"></div>`;
+    const html = convert(doc('<h2>2. Check-In: “Share What Matters” (3 - 5 min)</h2><h3>Notes</h3><h3>Notes</h3>'));
+    expect(html).toContain('<h2 id="2-check-in-share-what-matters-3-5-min">');
+    expect(html).toContain('<h3 id="notes">Notes</h3>');
+    expect(html).toContain('<h3 id="notes-2">Notes</h3>');
+});
+
+test('a heading can be given a shorter address', () => {
+    const doc = '<div id="contents"><h2>Team Meeting Best Practices</h2></div><div id="footer"></div>';
+    expect(convert(doc, { ids: { 'team-meeting-best-practices': 'meeting-best-practices' } }))
+        .toContain('<h2 id="meeting-best-practices">Team Meeting Best Practices</h2>');
+});
+
 test('refuses a page that is not a published Doc', () => {
     expect(() => convert('<html><body>Sign in</body></html>')).toThrow(/published/);
 });
@@ -54,5 +68,5 @@ test('replaces only the text between the markers', () => {
 
 test('the Team Tools page has its markers and content', () => {
     const page = fs.readFileSync(path.join(__dirname, '..', 'team-tools.html'), 'utf8');
-    expect(page).toMatch(/<!-- google-doc:start -->[\s\S]*<h2>[\s\S]*<!-- google-doc:end -->/);
+    expect(page).toMatch(/<!-- google-doc:start -->[\s\S]*<h2 id="meeting-best-practices">[\s\S]*<!-- google-doc:end -->/);
 });

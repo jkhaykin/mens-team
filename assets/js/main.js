@@ -100,14 +100,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const isCollapsed = () => header.classList.contains('nav-collapsed') ||
         getComputedStyle(hamburger).display !== 'none';
     const submenus = Array.from(nav.querySelectorAll('.has-submenu'));
+    // Menus can sit inside menus (Resources > Team Tools); closing one closes
+    // any open inside it.
+    const toggleOf = item => item.querySelector(':scope > .submenu-toggle');
     const setSubmenuOpen = (item, open) => {
         item.classList.toggle('open', open);
-        item.querySelector('.submenu-toggle').setAttribute('aria-expanded', open);
+        toggleOf(item).setAttribute('aria-expanded', open);
+        if (!open) submenus.forEach(inner => { if (inner !== item && item.contains(inner)) setSubmenuOpen(inner, false); });
     };
     const closeSubmenus = () => submenus.forEach(item => setSubmenuOpen(item, false));
     submenus.forEach(item => {
-        item.querySelector('.submenu-toggle').addEventListener('click', function() {
+        toggleOf(item).addEventListener('click', function() {
             setSubmenuOpen(item, !item.classList.contains('open'));
+        });
+        // A menu shown by hover closes when the pointer leaves; take any menu
+        // clicked open inside it along, so it doesn't reappear next hover.
+        item.addEventListener('mouseleave', function() {
+            if (!isCollapsed() && !item.classList.contains('open')) setSubmenuOpen(item, false);
         });
         item.addEventListener('focusout', function(e) {
             if (!isCollapsed() && !item.contains(e.relatedTarget)) setSubmenuOpen(item, false);
@@ -118,10 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
         submenus.forEach(item => { if (!item.contains(e.target)) setSubmenuOpen(item, false); });
     });
     document.addEventListener('keydown', function(e) {
-        const openItem = submenus.find(item => item.classList.contains('open'));
+        // Escape closes the innermost open menu first.
+        const openItem = submenus.filter(item => item.classList.contains('open')).pop();
         if (e.key === 'Escape' && openItem) {
             setSubmenuOpen(openItem, false);
-            openItem.querySelector('.submenu-toggle').focus();
+            toggleOf(openItem).focus();
         }
     });
     nav.querySelectorAll('.submenu a').forEach(link => link.addEventListener('click', closeSubmenus));

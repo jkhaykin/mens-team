@@ -18,6 +18,11 @@ const DOCS = [
     {
         page: 'team-tools.html',
         url: 'https://docs.google.com/document/d/e/2PACX-1vThdVyhKotE3oONJL2n5bOZIVhErKtKcmo4eccQtJyuLxY6qguFgI-T0MrB1p6uLITSe1zxeyhHuPKn/pub',
+        // Shorter link addresses for some headings (menus link to these):
+        // address made from the heading text -> address to use instead.
+        ids: {
+            'team-meeting-best-practices': 'meeting-best-practices',
+        },
     },
 ];
 
@@ -70,8 +75,30 @@ function styleClasses(html) {
     return { bold, italic };
 }
 
+// Gives each heading an id from its text, e.g. "Team Meeting Best Practices"
+// -> id="team-meeting-best-practices", so menus can link straight to a section.
+function slugify(text) {
+    return decodeEntities(text.replace(/<[^>]+>/g, ''))
+        .toLowerCase()
+        .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/['\u2018\u2019]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'section';
+}
+
+function addHeadingIds(html, renames = {}) {
+    const seen = new Map();
+    return html.replace(/<(h[2-6])>([\s\S]*?)<\/\1>/g, (_, tag, inner) => {
+        const slug = slugify(inner);
+        const base = renames[slug] || slug;
+        const n = (seen.get(base) || 0) + 1;
+        seen.set(base, n);
+        return `<${tag} id="${n === 1 ? base : `${base}-${n}`}">${inner}</${tag}>`;
+    });
+}
+
 // Turns a published Google Doc (the whole /pub page) into clean HTML.
-function convert(html) {
+function convert(html, { ids = {} } = {}) {
     const start = html.indexOf('<div id="contents">');
     if (start === -1) throw new Error('No document contents found. Is the Doc still published to the web?');
     let body = html.slice(start);
@@ -189,7 +216,7 @@ function convert(html) {
     }
     closeListsTo(0);
 
-    return out.join('')
+    return addHeadingIds(out.join(''), ids)
         .replace(/<(strong|em)><\/\1>/g, '')
         .replace(/<\/strong><strong>/g, '')
         .replace(/<\/em><em>/g, '')
@@ -220,11 +247,11 @@ function insert(page, content) {
 async function main() {
     const root = path.join(__dirname, '..');
     let failed = false;
-    for (const { page, url } of DOCS) {
+    for (const { page, url, ids } of DOCS) {
         try {
             const res = await fetch(url, { headers: { 'User-Agent': 'manifest-site-sync' } });
             if (!res.ok) throw new Error(`Google returned ${res.status}`);
-            const content = convert(await res.text());
+            const content = convert(await res.text(), { ids });
             if (content.replace(/<[^>]+>/g, '').trim().length < 50) {
                 throw new Error('The Doc came back (nearly) empty; leaving the page as it is.');
             }
@@ -248,4 +275,4 @@ async function main() {
 
 if (require.main === module) main();
 
-module.exports = { convert, insert, cleanHref };
+module.exports = { convert, insert, cleanHref, slugify };
