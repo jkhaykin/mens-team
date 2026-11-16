@@ -21,6 +21,22 @@ To work on this site locally:
 2. Open the files in your preferred code editor
 3. Preview the site in your browser by opening `index.html`
 
+### Tests
+
+Browser tests (Playwright) live in `tests/` and run in your installed Google Chrome.
+
+1. Once: `npm install`
+2. Run all tests: `npm test` (or `npm run test:ui` to watch them run)
+3. In VS Code, install the recommended **Playwright Test for VS Code** extension; the tests then
+   appear in the Testing panel (beaker icon) with a ▶ button for each.
+
+The member page is tested against a simulated sign-in with made-up members
+(`tests/helpers/mock-supabase.js`), and the glossary against a small made-up sheet
+(`tests/fixtures/glossary.csv`). The tests never touch the real member database, and real
+member data must never be added to this repository: it is public.
+
+GitHub runs the same tests on every pull request (`.github/workflows/tests.yml`).
+
 ## Customization
 
 ### Images

@@ -161,7 +161,7 @@ section[id] {
     height: 40px;
 }
 
-.main-nav ul {
+.main-nav > ul {
     display: flex;
     list-style: none;
 }
@@ -185,7 +185,7 @@ section[id] {
     display: block;
 }
 
-.site-header.nav-collapsed .main-nav ul {
+.site-header.nav-collapsed .main-nav > ul {
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -198,7 +198,7 @@ section[id] {
     box-shadow: 0 5px 10px var(--color-shadow);
 }
 
-.site-header.nav-collapsed .main-nav.open ul {
+.site-header.nav-collapsed .main-nav.open > ul {
     max-height: calc(100vh - 86px);
     max-height: calc(100dvh - 86px);
     overflow-y: auto;
@@ -225,6 +225,102 @@ section[id] {
 
 .main-nav a:hover {
     color: var(--color-link);
+}
+
+/* Resources dropdown (Processes, Tools) */
+.main-nav .has-submenu {
+    position: relative;
+}
+
+.main-nav .submenu-toggle {
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.main-nav .submenu-toggle::after {
+    content: "";
+    display: inline-block;
+    margin-left: 6px;
+    vertical-align: 0.2em;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+}
+
+.main-nav .submenu-toggle:hover,
+.main-nav .submenu-toggle.current {
+    color: var(--color-link);
+}
+
+.main-nav .submenu {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: -18px;
+    min-width: 170px;
+    padding: 12px 0 8px;
+    margin: 0;
+    background-color: var(--color-header-bg);
+    box-shadow: 0 5px 10px var(--color-shadow);
+    border-radius: 0 0 6px 6px;
+}
+
+.main-nav .has-submenu.open .submenu {
+    display: block;
+}
+
+/* Hover only where there's a real pointer; touch screens use tap */
+@media (hover: hover) {
+    .main-nav .has-submenu:hover .submenu {
+        display: block;
+    }
+}
+
+.main-nav .submenu li {
+    margin: 0;
+}
+
+/* The last dropdown opens leftward so it never runs off the screen edge */
+.main-nav #resources-menu {
+    left: auto;
+    right: -18px;
+}
+
+.main-nav .submenu a {
+    display: block;
+    padding: 8px 18px;
+}
+
+/* In the hamburger menu, Resources shows on its own; hover or tap it to
+   reveal Processes and Tools indented below */
+.site-header.nav-collapsed .main-nav .submenu-toggle {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+}
+
+.site-header.nav-collapsed .main-nav .submenu {
+    position: static;
+    min-width: 0;
+    padding: 0 0 6px;
+    box-shadow: none;
+    border-radius: 0;
+    background: none;
+}
+
+.site-header.nav-collapsed .main-nav .submenu a {
+    padding: 8px 15px;
+    font-size: 0.85rem;
 }
 
 /* Hamburger Menu */
@@ -936,7 +1032,7 @@ section[id] {
         display: block;
     }
     
-    .main-nav ul {
+    .main-nav > ul {
         flex-direction: column;
         position: absolute;
         top: 100%;
@@ -949,7 +1045,7 @@ section[id] {
         box-shadow: 0 5px 10px var(--color-shadow);
     }
     
-    .main-nav.open ul {
+    .main-nav.open > ul {
         max-height: calc(100vh - 86px);
         overflow-y: auto;
     }
@@ -966,6 +1062,26 @@ section[id] {
     .main-nav a {
         display: block;
         padding: 12px 15px;
+    }
+
+    .main-nav .submenu-toggle {
+        display: block;
+        width: 100%;
+        padding: 12px 15px;
+    }
+
+    .main-nav .submenu {
+        position: static;
+        min-width: 0;
+        padding: 0 0 6px;
+        box-shadow: none;
+        border-radius: 0;
+        background: none;
+    }
+
+    .main-nav .submenu a {
+        padding: 8px 15px;
+        font-size: 0.85rem;
     }
 }
  
@@ -1264,6 +1380,39 @@ section[id] {
     accent-color: var(--brand-red);
 }
 
+/* Your Details: two columns of fields on wider screens */
+.member-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0 20px;
+}
+
+.member-details input {
+    max-width: none;
+}
+
+.member-settings h3 {
+    margin: 25px 0 10px;
+    font-size: 1.15rem;
+}
+
+.member-phone {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+}
+
+.member-phone-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+}
+
+.member-phone .member-form input {
+    margin-bottom: 12px;
+}
+
 .process .member-heading {
     margin-top: 10px;
 }
@@ -1297,6 +1446,61 @@ section[id] {
 
 .member-person[hidden] {
     display: none;
+}
+
+.member-team h3 {
+    margin: 30px 0 0;
+    font-size: 1.3rem;
+}
+
+.member-team-count {
+    color: var(--color-text-muted);
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.member-team .member-list {
+    margin-bottom: 10px;
+}
+
+.member-team[hidden] {
+    display: none;
+}
+
+.member-manage {
+    margin-top: 6px;
+    font-size: 0.9rem;
+}
+
+/* Team Lead and Moderator tags share one look */
+.member-lead,
+.member-mod-tag {
+    color: var(--color-text);
+    background-color: var(--brand-red-deep);
+}
+
+.member-details .member-toggle {
+    display: flex;
+    margin: 0 0 4px;
+    font-weight: 400;
+}
+
+#lead-status {
+    min-height: 1.4em;
+    margin: 0 0 12px;
+}
+
+.member-details .member-toggle input {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: checkbox;
+    appearance: auto;
+    accent-color: var(--brand-red);
 }
 
 .member-name {

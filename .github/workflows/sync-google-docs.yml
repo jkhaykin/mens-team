@@ -1,0 +1,44 @@
+# Copies published Google Docs into site pages (see scripts/sync-google-docs.js).
+# Runs every hour; to publish an edit right away, open Actions > "Sync Google Docs" > Run workflow.
+name: Sync Google Docs
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the updated page
+  actions: write    # start the deploy workflow
+
+concurrency:
+  group: sync-google-docs
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Copy the Docs into the pages
+        run: node scripts/sync-google-docs.js
+
+      - name: Commit and deploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update pages from Google Docs"
+          git push
+          # Pushes made by a workflow don't trigger other workflows, so start the deploy here.
+          gh workflow run static.yml --ref main
