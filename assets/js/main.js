@@ -93,6 +93,40 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', queueFit);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNav);
 
+    // Resources dropdown: hover, click or Enter/Space opens it, both in the
+    // full-width menu and the hamburger menu (tap on phones).
+    // In the hamburger menu each section opens and closes on its own; closing
+    // one when another is tapped would shift the list under the finger.
+    const isCollapsed = () => header.classList.contains('nav-collapsed') ||
+        getComputedStyle(hamburger).display !== 'none';
+    const submenus = Array.from(nav.querySelectorAll('.has-submenu'));
+    const setSubmenuOpen = (item, open) => {
+        item.classList.toggle('open', open);
+        item.querySelector('.submenu-toggle').setAttribute('aria-expanded', open);
+    };
+    const closeSubmenus = () => submenus.forEach(item => setSubmenuOpen(item, false));
+    submenus.forEach(item => {
+        item.querySelector('.submenu-toggle').addEventListener('click', function() {
+            setSubmenuOpen(item, !item.classList.contains('open'));
+        });
+        item.addEventListener('focusout', function(e) {
+            if (!isCollapsed() && !item.contains(e.relatedTarget)) setSubmenuOpen(item, false);
+        });
+    });
+    document.addEventListener('click', function(e) {
+        if (isCollapsed() && nav.contains(e.target)) return;
+        submenus.forEach(item => { if (!item.contains(e.target)) setSubmenuOpen(item, false); });
+    });
+    document.addEventListener('keydown', function(e) {
+        const openItem = submenus.find(item => item.classList.contains('open'));
+        if (e.key === 'Escape' && openItem) {
+            setSubmenuOpen(openItem, false);
+            openItem.querySelector('.submenu-toggle').focus();
+        }
+    });
+    nav.querySelectorAll('.submenu a').forEach(link => link.addEventListener('click', closeSubmenus));
+    closeSubmenus();
+
     hamburger.addEventListener('click', function() {
         setMenuOpen(!nav.classList.contains('open'));
     });

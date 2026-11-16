@@ -1,0 +1,13 @@
+{
+  "name": "manifest-website",
+  "private": true,
+  "description": "Manifest Mens Group website (static). npm is used only for the browser tests.",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1"
+  }
+}
