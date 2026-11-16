@@ -275,13 +275,13 @@ section[id] {
     border-radius: 0 0 6px 6px;
 }
 
-.main-nav .has-submenu.open .submenu {
+.main-nav .has-submenu.open > .submenu {
     display: block;
 }
 
 /* Hover only where there's a real pointer; touch screens use tap */
 @media (hover: hover) {
-    .main-nav .has-submenu:hover .submenu {
+    .main-nav .has-submenu:hover > .submenu {
         display: block;
     }
 }
@@ -299,6 +299,42 @@ section[id] {
 .main-nav .submenu a {
     display: block;
     padding: 8px 18px;
+}
+
+/* A menu inside a dropdown (Resources > Team Tools): the toggle looks like the
+   other dropdown links, and its items fly out to the left, since Resources sits
+   at the right edge of the screen. */
+.main-nav .has-flyout > .submenu-toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 18px;
+    text-align: left;
+}
+
+.main-nav .has-flyout > .submenu-toggle::after {
+    content: none;
+}
+
+.main-nav .has-flyout > .submenu-toggle::before {
+    content: "";
+    margin: 0 8px 0 -10px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 5px solid currentColor;
+}
+
+.main-nav .flyout {
+    top: -12px;
+    left: auto;
+    right: 100%;
+    min-width: 240px;
+    padding: 12px 0;
+    border-radius: 6px 0 6px 6px;
+}
+
+.process h3[id] {
+    scroll-margin-top: 100px;
 }
 
 /* In the hamburger menu, Resources shows on its own; hover or tap it to
@@ -321,6 +357,22 @@ section[id] {
 .site-header.nav-collapsed .main-nav .submenu a {
     padding: 8px 15px;
     font-size: 0.85rem;
+}
+
+/* In the hamburger menu, Team Tools opens in place, one step further in */
+.site-header.nav-collapsed .main-nav .has-flyout > .submenu-toggle {
+    display: block;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.site-header.nav-collapsed .main-nav .has-flyout > .submenu-toggle::before {
+    content: none;
+}
+
+.site-header.nav-collapsed .main-nav .has-flyout > .submenu-toggle::after {
+    content: "";
 }
 
 /* Hamburger Menu */
@@ -1616,4 +1668,23 @@ button.btn {
 button.btn:disabled {
     opacity: 0.6;
     cursor: wait;
+}
+
+/* Team Tools inside the hamburger menu at tablet/phone widths (the same as the
+   .nav-collapsed rules, for when the fallback query collapses the menu) */
+@media screen and (max-width: 1100px) {
+    .main-nav .has-flyout > .submenu-toggle {
+        display: block;
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    .main-nav .has-flyout > .submenu-toggle::before {
+        content: none;
+    }
+
+    .main-nav .has-flyout > .submenu-toggle::after {
+        content: "";
+    }
 }
