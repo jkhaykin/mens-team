@@ -50,6 +50,10 @@ body {
 .glossary-search,
 .glossary-jump,
 .contact-form-frame,
+.term-comments,
+.member-bar,
+.member-welcome,
+.member-settings,
 .banner-image {
     display: none !important;
 }

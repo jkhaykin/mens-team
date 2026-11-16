@@ -192,6 +192,9 @@
                 flash(target);
             }
         }
+
+        // Signed-in members also get a comment thread under each term.
+        if (window.ManifestComments) window.ManifestComments.start(entries.map(function (e) { return e.el; }));
     }
 
     function updateCount(shown, total, q) {
