@@ -60,6 +60,19 @@
         return d ? '+' + d : '';
     }
 
+    // Calls a database function open to everyone (no sign-in), without loading
+    // the sign-in library: one small request.
+    function publicRpc(name) {
+        return fetch(SUPABASE_URL + '/rest/v1/rpc/' + name, {
+            method: 'POST',
+            headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+            body: '{}'
+        }).then(function (res) {
+            if (!res.ok) throw new Error('Request failed: ' + res.status);
+            return res.json();
+        });
+    }
+
     function escapeHtml(s) {
         return String(s == null ? '' : s)
             .replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -71,6 +84,7 @@
         getClient: getClient,
         normalizePhone: normalizePhone,
         formatPhone: formatPhone,
+        publicRpc: publicRpc,
         escapeHtml: escapeHtml
     };
 })();
