@@ -1,5 +1,6 @@
-// Members-only comment threads under each glossary term.
-// Does nothing (and loads nothing extra) unless this browser is signed in.
+// Comment threads under each glossary term. Everyone can read them; only
+// signed-in members can post. Visitors get the comments with one small request
+// (no sign-in library); members get the full threads with posting and editing.
 (function () {
     'use strict';
 
@@ -8,6 +9,7 @@
     var esc = M.escapeHtml;
 
     var client = null;
+    var isMember = false;     // false: read-only view for visitors
     var isModerator = false;
     var entryEls = [];
     var byTerm = {};          // term id -> [comments]
@@ -18,7 +20,7 @@
 
     function start(els) {
         entryEls = els;
-        if (!M.hasStoredSession()) return;
+        if (!M.hasStoredSession()) { startPublic(); return; }
         M.getClient().then(function (c) {
             client = c;
             return client.auth.getSession();
@@ -26,17 +28,35 @@
             if (!res || !res.data || !res.data.session) return null;
             return Promise.all([client.rpc('is_member'), client.rpc('is_moderator')]);
         }).then(function (r) {
-            if (!r || r[0].error || !r[0].data) return; // not an active member: show nothing
+            if (!r || r[0].error || !r[0].data) { startPublic(); return; } // not an active member
+            isMember = true;
             isModerator = !!r[1].data;
             showMemberBar();
             return refresh();
+        }).catch(startPublic);
+    }
+
+    // Visitors: read the visible comments, no posting.
+    function startPublic() {
+        isMember = false;
+        isModerator = false;
+        M.publicRpc('glossary_public_comments').then(function (rows) {
+            group(rows);
+            entryEls.forEach(renderThread);
         }).catch(function () { /* comments are optional; the glossary still works */ });
+    }
+
+    function group(rows) {
+        byTerm = {};
+        (rows || []).forEach(function (c) {
+            (byTerm[c.term_id] = byTerm[c.term_id] || []).push(c);
+        });
     }
 
     function showMemberBar() {
         var bar = document.createElement('p');
         bar.className = 'member-bar';
-        bar.innerHTML = 'Signed in as a member: each term has a members-only comment thread. ' +
+        bar.innerHTML = 'Signed in as a member: you can comment on any term. Comments are public. ' +
             '<a href="members.html">Member area</a> &middot; ' +
             '<button type="button" class="link-button" id="glossary-sign-out">Sign out</button>';
         var anchor = document.getElementById('glossary-jump');
@@ -49,10 +69,7 @@
     function refresh() {
         return client.rpc('glossary_comment_feed').then(function (res) {
             if (res.error) throw res.error;
-            byTerm = {};
-            (res.data || []).forEach(function (c) {
-                (byTerm[c.term_id] = byTerm[c.term_id] || []).push(c);
-            });
+            group(res.data);
             entryEls.forEach(renderThread);
         });
     }
@@ -60,6 +77,9 @@
     function countLabel(n) {
         return n ? n + (n === 1 ? ' comment' : ' comments') : 'Add a comment';
     }
+
+    // Visitors: only terms that have comments get a thread, and no form.
+    var SIGN_IN_NOTE = '<p class="member-fineprint">Members can <a href="members.html">sign in</a> to comment.</p>';
 
     function commentHtml(c) {
         var meta = '<strong>' + esc(c.author) + '</strong> &middot; ' +
@@ -93,6 +113,10 @@
         var list = byTerm[termId] || [];
         var open = !!openTerms[termId];
         var box = entryEl.querySelector('.term-comments');
+        if (!isMember && !list.length) {
+            if (box) box.remove();
+            return;
+        }
         if (!box) {
             box = document.createElement('div');
             box.className = 'term-comments';
@@ -104,7 +128,11 @@
         box.innerHTML =
             '<button type="button" class="term-comments-toggle" aria-expanded="' + open + '" data-act="toggle">' +
             esc(countLabel(isModerator ? list.length : visible)) + '</button>' +
-            (open
+            (open && !isMember
+                ? '<div class="term-comments-panel"><ul class="comment-list">' +
+                  list.map(commentHtml).join('') + '</ul>' + SIGN_IN_NOTE + '</div>'
+                : '') +
+            (open && isMember
                 ? '<div class="term-comments-panel">' +
                   (list.length ? '<ul class="comment-list">' + list.map(commentHtml).join('') + '</ul>' : '') +
                   '<form class="comment-form">' +
@@ -112,7 +140,8 @@
                   '<textarea id="c-' + termId + '" maxlength="2000" rows="3" ' +
                   'placeholder="Your thoughts on this term&hellip;"></textarea>' +
                   '<p class="comment-actions"><button type="submit" class="btn btn-small">Post</button></p>' +
-                  '<p class="member-fineprint">Members only. Share your own experience, never another man&rsquo;s.</p>' +
+                  '<p class="member-fineprint">Comments are public, shown with your first name and last initial. ' +
+                  'Share your own experience, never another man&rsquo;s.</p>' +
                   '<p class="member-fineprint comment-error" role="alert" hidden></p>' +
                   '</form></div>'
                 : '');

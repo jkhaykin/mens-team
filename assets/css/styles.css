@@ -204,12 +204,9 @@ section[id] {
     overflow-y: auto;
 }
 
-/* Links that only appear in the hamburger menu, so it matches the footer */
+/* Member Login shows in both the full menu and the hamburger menu, so the
+   two offer the same choices */
 .main-nav .nav-extra {
-    display: none;
-}
-
-.site-header.nav-collapsed .main-nav .nav-extra {
     display: list-item;
 }
 

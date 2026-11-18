@@ -34,6 +34,7 @@ async function mockSupabase(page, opts = {}) {
         meId: opts.meId || 'm-pat',
         members: JSON.parse(JSON.stringify(opts.members || defaultMembers)),
         validCode: opts.validCode || '123456',
+        comments: opts.comments || [],   // what glossary_comment_feed returns
     };
 
     await page.addInitScript((cfg) => {
@@ -88,6 +89,7 @@ async function mockSupabase(page, opts = {}) {
                     case 'member_roster': return ok(roster());
                     case 'member_moderators': return ok(db.members.filter((m) => m.is_moderator).map((m) => m.id));
                     case 'is_member': return ok(true);
+                    case 'glossary_comment_feed': return ok(cfg.comments || []);
                     case 'is_moderator': return ok(!!me().is_moderator);
                     case 'phone_available_for_me': {
                         const digits = String(args.new_phone).replace(/\D/g, '');

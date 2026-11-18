@@ -81,6 +81,16 @@ test.describe('wide screen', () => {
         await expect(submenuOf(page, 'About')).toBeHidden();
     });
 
+    test('offers the same choices as the hamburger menu, Member Login included', async ({ page }) => {
+        for (const width of [1400, 1101]) {
+            await page.setViewportSize({ width, height: 900 });
+            await page.goto('/index.html');
+            await expect(page.locator('#main-nav > ul > li:visible > :is(a, button)'))
+                .toHaveText(['Who We Are', 'About', 'Contact', 'Resources', 'Member Login']);
+            await expect(page.locator('.hamburger')).toBeHidden();
+        }
+    });
+
     test('Team Tools flies out from Resources on hover and click', async ({ page }) => {
         await page.goto('/index.html');
         await toggle(page, 'Resources').hover();
