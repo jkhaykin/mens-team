@@ -50,6 +50,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Embedded JotForm: the form reports its height to this page (it grows
+    // when "required" errors appear). Resize its frame to match; a fixed
+    // height cut off the Submit button. When an error appears, also scroll
+    // it into view below the fixed header.
+    window.addEventListener('message', function(e) {
+        if (e.origin !== 'https://form.jotform.com') return;
+        const frame = Array.from(document.querySelectorAll('iframe[id^="JotFormIFrame-"]'))
+            .find(f => f.contentWindow === e.source);
+        if (!frame) return;
+
+        // Heights arrive as text ("setHeight:939:<form id>"); the error
+        // position arrives as an object.
+        let msg = e.data;
+        if (typeof msg === 'string') {
+            const parts = msg.split(':');
+            if (parts[0] === 'setHeight') {
+                const height = parseInt(parts[1], 10);
+                if (height > 0 && height < 5000) frame.style.height = height + 'px';
+                return;
+            }
+            try { msg = JSON.parse(msg); } catch (err) { return; }
+        }
+        if (msg && msg.type === 'NVA_VALIDATION_ERROR_POSITION' && msg.validationErrorY >= 0) {
+            const header = document.querySelector('.site-header');
+            // JotForm's position is about 70px below the field's label; leave
+            // room so the label shows too.
+            const offset = (header ? header.offsetHeight : 0) + 100;
+            window.scrollTo({
+                top: frame.getBoundingClientRect().top + window.pageYOffset + msg.validationErrorY - offset,
+                behavior: 'smooth'
+            });
+        }
+    });
+
     // Mobile navigation toggle
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('.main-nav');
