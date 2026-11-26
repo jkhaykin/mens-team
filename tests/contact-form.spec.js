@@ -21,6 +21,13 @@ const fromForm = (page, message) =>
 
 const frameHeight = (page) => page.locator(frameSel).evaluate((el) => el.getBoundingClientRect().height);
 
+test('the home page embeds the intake form, with a title for screen readers', async ({ page }) => {
+    const frame = page.locator(frameSel);
+    await expect(frame).toHaveAttribute('src', `https://form.jotform.com/${FORM_ID}`);
+    await expect(frame).toHaveAttribute('title', /\S/);
+    await expect(frame).toBeVisible();
+});
+
 test('the frame grows and shrinks to the height the form reports', async ({ page }) => {
     await fromForm(page, `setHeight:1290:${FORM_ID}`);
     await expect.poll(() => frameHeight(page)).toBe(1290);
