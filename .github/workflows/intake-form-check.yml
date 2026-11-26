@@ -1,0 +1,43 @@
+# Monthly check that the intake form on the live site still works, including
+# one test submission that must land on the thank-you page. The submission
+# creates a JotForm entry and a notification email labelled "AUTOMATED TEST".
+# Google tracking is blocked, so it never counts as an Ads conversion.
+#
+# If it fails, GitHub emails whoever last changed this file's schedule.
+# Run it by hand from GitHub > Actions > "Intake form check" > Run workflow.
+name: Intake form check
+
+on:
+  schedule:
+    - cron: "23 16 1 * *"   # the 1st of each month, 16:23 UTC (morning in California)
+  workflow_dispatch:
+    inputs:
+      submit:
+        description: "Also send a test submission (creates a JotForm entry and email)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Uses the Google Chrome already on GitHub's runners.
+      - run: npm run check:live
+        env:
+          SUBMIT_TEST_ENTRY: ${{ (github.event_name == 'schedule' || inputs.submit) && '1' || '0' }}
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: live-check-report
+          path: playwright-report/
+          retention-days: 30
